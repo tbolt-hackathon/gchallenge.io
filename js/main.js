@@ -80,6 +80,10 @@
 		$('a.action-signin').on('click', function(){
 			$('section.signin, button.signin-signin').toggleClass('hidden');
 		});
+
+		$('button.action-post').on('click', function(){
+			$('div.new-challenge-overlay').toggleClass('hidden');
+		});
 	});
 
 })();

@@ -219,3 +219,65 @@ body > .posts > article > .video-container embed
     width: 100%;
     height: 100%;
 }
+
+body > div.new-challenge-overlay
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+body > div.new-challenge-overlay.hidden
+{
+    z-index: -1;
+    opacity: 0;
+    visibility: collapse;
+}
+
+body > div.new-challenge-overlay > div.new-challenge-dialog
+{
+    margin: 128px auto auto;
+    height: 500px;
+    max-width: 1024px;
+    background: white;
+    box-shadow: 0 1px 4px black;
+    border-radius: 2px;
+}
+
+body > div.new-challenge-overlay > div.new-challenge-dialog > header
+{
+    background: #383fff;
+    box-shadow: 0 0 16px black;
+    height: 56px;
+}
+
+body > div.new-challenge-overlay > div.new-challenge-dialog > header > a
+{
+    width: 56px;
+    height: 56px;
+    font-weight: bolder;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    padding-top: 17px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+body > div.new-challenge-overlay > div.new-challenge-dialog > header > a:hover
+{
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body > div.new-challenge-overlay > div.new-challenge-dialog > header > span
+{
+    height: 56px;
+    margin-left: 16px;
+    display: inline-block;
+    color: white;
+    font-weight: bolder;
+}
