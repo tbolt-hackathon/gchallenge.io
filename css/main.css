@@ -1,0 +1,110 @@
+html, body
+{
+    margin: 0;
+    padding: 0;
+    background: #eeeeee;
+    font-family: "Helvetica Neue", HelveticaNeue, "TeX Gyre Heros", TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arimo, Helvetica, Arial, sans-serif;
+}
+
+body > header
+{
+    background: #383fff;
+    box-shadow: 0 0 16px black;
+}
+
+body > header > nav
+{
+    display: inline-block;
+}
+body > header > nav.right
+{
+    float: right;
+}
+
+body > header > nav > a
+{
+    cursor: pointer;
+    color: white;
+    padding: 2em;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+body > header > nav > a:hover
+{
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body > section
+{
+    max-width: 1024px;
+
+    background: white;
+    border-radius: 2px;
+
+    box-shadow: 0 1px 4px black;
+
+    margin: 48px auto auto;
+}
+
+body > section.info > h1, body > section.info > h2
+{
+    font-weight: normal;
+    padding: 32px;
+}
+
+body > section.info > h1
+{
+    margin-bottom: -64px;
+}
+
+body > section.info > h2
+{
+    font-size: 1.4em;
+}
+
+body > section.signin
+{
+    background: rgba(56, 63, 255, 0.05);
+}
+
+body > section.signin > input
+{
+    padding: 16px 32px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px gray solid;
+}
+
+body > section.signin > input:focus
+{
+    background: rgba(56, 63, 255, 0.05);
+}
+
+button
+{
+    background: #383fff;
+    border-radius: 2px;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    box-shadow: 0 1px 4px black;
+    margin: 16px auto auto;
+    display: block;
+    text-transform: uppercase;
+}
+
+button:hover
+{
+    background: #2d35cc;
+}
+
+button:active
+{
+    background: #232b99;
+}
