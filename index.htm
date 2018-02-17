@@ -11,23 +11,29 @@
         <header>
             <nav class="left">
                 <a class="golos-io" target="_blank">golos.io</a>
-                <a class="home" href="/">GChallenge.io</a>
+                <a class="home" href="/">GChallenge</a>
             </nav>
             <nav class="right">
                 <a class="action-signin" target="_blank">Sign in</a>
             </nav>
         </header>
 
-        <section class="signin">
+        <section class="signin hidden">
             <input type="text" class="signin-login" placeholder="Login" />
             <input type="password" class="signin-password" placeholder="Private key" />
         </section>
-        <button type="button" class="signin-signin">Sign in</button>
+        <button type="button" class="signin-signin hidden">Sign in</button>
 
         <section class="info">
             <h1>Post your <b>challenges</b> on golos.io blockchain and wait for its completion (or not).</h1>
             <h2>Any user can complete your challenge and receive money.</h2>
         </section>
+
+        <div class="posts">
+
+        </div>
+
+        <button class="fab action-post" type="button">+</button>
 
         <script src="https://cdn.jsdelivr.net/npm/golos-js@0.5.30/dist/golos.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>

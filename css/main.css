@@ -1,3 +1,8 @@
+*
+{
+    transition: 0.2s;
+}
+
 html, body
 {
     margin: 0;
@@ -31,12 +36,17 @@ body > header > nav > a
     display: inline-block;
 }
 
+body > header > nav > a.home
+{
+    font-weight: bold;
+}
+
 body > header > nav > a:hover
 {
     background: rgba(0, 0, 0, 0.2);
 }
 
-body > section
+body > section, body > .posts > article
 {
     max-width: 1024px;
 
@@ -67,6 +77,17 @@ body > section.info > h2
 body > section.signin
 {
     background: rgba(56, 63, 255, 0.05);
+    height: 96px;
+    visibility: visible;
+}
+
+body > section.signin.hidden
+{
+    margin-top: -50px;
+    z-index: -999;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
 }
 
 body > section.signin > input
@@ -86,11 +107,27 @@ body > section.signin > input:focus
     background: rgba(56, 63, 255, 0.05);
 }
 
+
+button.signin-signin
+{
+    height: 48px;
+    visibility: visible;
+}
+
+button.signin-signin.hidden
+{
+    z-index: -999;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
+}
+
 button
 {
     background: #383fff;
     border-radius: 2px;
     border: none;
+    outline: none;
     color: white;
     padding: 16px 32px;
     box-shadow: 0 1px 4px black;
@@ -107,4 +144,78 @@ button:hover
 button:active
 {
     background: #232b99;
+}
+
+button.fab
+{
+    z-index: 999;
+    position: fixed;
+    bottom: 64px;
+    right: 64px;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+}
+
+body > .posts > article
+{
+    margin: 16px auto auto;
+}
+
+body > .posts > article > header
+{
+    background: rgba(0, 0, 0, 0.03);
+    padding-bottom: 12px;
+    margin-bottom: -8px;
+}
+
+body > .posts > article > header > h1, body > .posts > article > header > span.summary
+{
+    font-weight: normal;
+    padding: 32px;
+}
+
+body > .posts > article > header > h1
+{
+    margin-bottom: -20px;
+}
+
+body > .posts > article > header > span.summary
+{
+    font-size: 1.2em;
+}
+
+body > .posts > article > section.body
+{
+    padding: 16px 32px;
+}
+
+body > .posts > article > section.body img
+{
+    box-sizing: border-box;
+    max-width: 100%;
+    text-align: center;
+    margin: 8px -32px;
+}
+
+body > .posts > article > .video-container
+{
+    position: relative;
+    padding-bottom: 56.25%; /*16:9*/
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+body > .posts > article > .video-container iframe,
+body > .posts > article > .video-container object,
+body > .posts > article > .video-container embed
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
