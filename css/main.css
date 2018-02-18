@@ -46,6 +46,11 @@ body > header > nav > a:hover
     background: rgba(0, 0, 0, 0.2);
 }
 
+body > header > nav > a:active
+{
+    background: rgba(0, 0, 0, 0.4);
+}
+
 body > section, body > .posts > article
 {
     max-width: 1024px;
@@ -127,7 +132,7 @@ button
     background: #383fff;
     border-radius: 2px;
     border: none;
-    outline: none;
+    outline: none !important;
     color: white;
     padding: 16px 32px;
     box-shadow: 0 1px 4px black;
@@ -261,10 +266,10 @@ body > div.new-challenge-overlay > div.new-challenge-dialog > header > a
     width: 56px;
     height: 56px;
     font-weight: bolder;
-    color: white;
+    color: white !important;
     display: inline-block;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 1px;
     box-sizing: border-box;
     cursor: pointer;
     font-size: 2em;
@@ -275,6 +280,11 @@ body > div.new-challenge-overlay > div.new-challenge-dialog > header > a:hover
     background: rgba(0, 0, 0, 0.2);
 }
 
+body > div.new-challenge-overlay > div.new-challenge-dialog > header > a:active
+{
+    background: rgba(0, 0, 0, 0.4);
+}
+
 body > div.new-challenge-overlay > div.new-challenge-dialog > header > span
 {
     height: 56px;
@@ -282,4 +292,5 @@ body > div.new-challenge-overlay > div.new-challenge-dialog > header > span
     display: inline-block;
     color: white;
     font-weight: bolder;
+    font-size: 1.2em;
 }
