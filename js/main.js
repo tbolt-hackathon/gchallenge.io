@@ -4,27 +4,26 @@
 	var templates = {};
 
 	var auth = {
-		loggedIn: !!localStorage.getItem('auth.login') && !!localStorage.getItem('auth.keys.pass'),
+		loggedIn: !!localStorage.getItem('auth.login') && !!localStorage.getItem('auth.keys._pass'),
 		login: function(){
 			return localStorage.getItem('auth.login');
 		},
 		auth: function(login, pass){
 			localStorage.setItem('auth.login', login);
-			localStorage.setItem('auth.keys.pass', pass);
+			localStorage.setItem('auth.keys._pass', pass);
 			auth.loggedIn = true;
 		},
 		checkAuth: function(success, fail){
 			if(!auth.loggedIn) return;
 			golos.api.getAccounts([auth.login()], function(err, response){
 
-				console.log(auth.keys.pass(), response);
+				console.log(auth.keys._pass(), response);
 				if (!err && response && response.length > 0)
 				{
 					var roles = ['memo'];
-					var keys = golos.auth.getPrivateKeys(auth.login(), auth.keys.pass(), roles);
+					var keys = golos.auth.getPrivateKeys(auth.login(), auth.keys._pass(), roles);
 					var resultWifToPublic = golos.auth.wifToPublic(keys.memo);
-					console.log(response[0].memo_key, resultWifToPublic);
-					if (response[0].memo_key == resultWifToPublic)
+					if (response[0].memo_key == resultWifToPublic || response[0].memo_key == auth.keys._getKey('memoPubkey'))
 					{
 						if(success != null) success();
 						return;
@@ -40,8 +39,8 @@
 			localStorage.clear();
 		},
 		keys: {
-			pass: function(){
-				return localStorage.getItem('auth.keys.pass');
+			_pass: function(){
+				return localStorage.getItem('auth.keys._pass');
 			},
 			owner: function(){
 				return auth.keys._getKey('owner');
@@ -60,7 +59,7 @@
 				var key = localStorage.getItem('auth.keys.' + role);
 				if(!key)
 				{
-					var wif = auth.keys.pass();
+					var wif = auth.keys._pass();
 					if(!wif) return;
 					var keys = golos.auth.getPrivateKeys(auth.login(), wif);
 					for(var k in keys)
@@ -274,12 +273,17 @@
 		});
 
 		function refreshAccountUI(){
+			if(auth.loggedIn)
+			{
+				auth.auth(auth.login(), auth.keys._pass());
+			}
+
 			console.log('Posting key: ', auth.keys.posting());
 			auth.checkAuth(function(){
 				$('section.signin, button.signin-signin').addClass('hidden');
 				$('a.action-signin').off('click').text('@' + auth.login());
 			}, function(){
-				alert('Invalid login or password');
+				//alert('Invalid login or password');
 			});
 		}
 
