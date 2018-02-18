@@ -316,11 +316,6 @@ body > div.new-challenge-overlay > div.new-challenge-dialog > header > span
     font-weight: bolder;
     font-size: 1.2em;
 }
-
-body > section.post-info
-{
-
-}
 body > section.post-info.hidden
 {
     z-index: -999;
