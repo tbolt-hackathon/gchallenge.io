@@ -1,8 +1,50 @@
 (function () {
-	//var APPTAG = 'gchallenge';
-	var APPTAG = 'ru--blokcheijn';
+	var APPTAG = 'gchallenge';
 	var config = null, node = null;
 	var templates = {};
+
+	var auth = {
+		loggedIn: false,
+		login: function(){
+			return localStorage.getItem('auth.login');
+		},
+		auth: function(login, pass){
+			localStorage.setItem('auth.login', login);
+			localStorage.setItem('auth.keys.owner', pass);
+			auth.loggedIn = true;
+		},
+		keys: {
+			owner: function(){
+				return localStorage.getItem('auth.keys.owner');
+			},
+			posting: function(){
+				return auth.keys._getKey('posting');
+			},
+			active: function(){
+				return auth.keys._getKey('active');
+			},
+			memo: function(){
+				return auth.keys._getKey('memo');
+			},
+			_getKey: function(role){
+				if(!auth.loggedIn) return null;
+				var key = localStorage.getItem('auth.keys.' + role);
+				if(!key)
+				{
+					var wif = auth.keys.owner();
+					if(!wif) return;
+					var keys = golos.auth.getPrivateKeys(auth.login(), wif);
+					for(var k in keys)
+					{
+						if(!keys.hasOwnProperty(k)) continue;
+						localStorage.setItem('auth.keys.' + k, keys[k]);
+						key = localStorage.getItem('auth.keys.' + role);
+					}
+				}
+				return key;
+			}
+		}
+	};
 
 	function loadJson(file, done, fail) {
 		$.ajax({
@@ -59,8 +101,19 @@
 		});
 	}
 	
-	function post() {
-		
+	function post(title, body)
+	{
+		if(!auth.loggedIn)
+		{
+			alert('Sign in with golos please');
+			return;
+		}
+
+		var meta = {};
+
+		golos.broadcast.comment(auth.keys.posting(), '', APPTAG, auth.login(), 'gchallenges-' + Date.now(), title, body, JSON.stringify(meta), function(err, result){
+			console.log(err, result);
+		});
 	}
 
 	function loadPosts(){
@@ -71,6 +124,8 @@
 			{
 				for(var k in result)
 				{
+					if(!result.hasOwnProperty(k)) continue;
+
 					var post = result[k];
 
 					var view = $(templates.article);
@@ -95,6 +150,15 @@
 
 		$('button.action-post').on('click', function(){
 			$('div.new-challenge-overlay').toggleClass('hidden');
+		});
+
+		$('button.action-post').on('contextmenu', function(){
+			post('Test', 'Hello, world!');
+		});
+
+		$('button.signin-signin').on('click', function(){
+			auth.auth($('input.signin-login').val(), $('input.signin-password').val());
+			console.log(auth.keys.posting());
 		});
 	});
 
