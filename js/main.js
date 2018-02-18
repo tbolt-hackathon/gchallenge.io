@@ -157,8 +157,21 @@
 		});
 
 		$('button.signin-signin').on('click', function(){
-			auth.auth($('input.signin-login').val(), $('input.signin-password').val());
+			var login = $('input.signin-login').val().trim();
+			var pass = $('input.signin-password').val().trim();
+
+			if(login.length < 1 || pass.length < 1) return;
+
+			auth.auth(login, pass);
 			console.log(auth.keys.posting());
+			$('section.signin, button.signin-signin').addClass('hidden');
+			$('a.action-signin').off('click').text('@' + auth.login());
+		});
+
+		$("input.signin-login, input.signin-password").keyup(function(e){
+			if (e.keyCode === 13) {
+				$("button.signin-signin").click();
+			}
 		});
 	});
 
