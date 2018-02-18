@@ -167,7 +167,6 @@
 					view.find('.title').text(post.title);
 					view.find('.author').text(post.author);
 					view.find('.body').html(post.body);
-					view.find('.join').html(post.join);
 					
 					$('div.posts').append(view);
 				}
