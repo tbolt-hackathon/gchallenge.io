@@ -29,9 +29,9 @@ body > header > nav.right
 body > header > nav > a
 {
     cursor: pointer;
-    color: white;
+    color: white !important;
     padding: 2em;
-    text-decoration: none;
+    text-decoration: none !important;
     text-transform: uppercase;
     display: inline-block;
 }
@@ -77,7 +77,7 @@ body > section.info > h2
 body > section.signin
 {
     background: rgba(56, 63, 255, 0.05);
-    height: 96px;
+    height: 114px;
     visibility: visible;
 }
 
@@ -241,17 +241,12 @@ body > div.new-challenge-overlay.hidden
 
 body > div.new-challenge-overlay > div.new-challenge-dialog
 {
-    width: 100%;
-    height: 50%;
     box-sizing: border-box;
     max-width: 1024px;
     background: white;
     box-shadow: 0 1px 4px black;
     border-radius: 2px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    position: fixed;
+    margin: 128px auto;
 }
 
 body > div.new-challenge-overlay > div.new-challenge-dialog > header
