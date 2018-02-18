@@ -160,6 +160,9 @@
 			auth.auth($('input.signin-login').val(), $('input.signin-password').val());
 			console.log(auth.keys.posting());
 		});
+		$('.addContentJson').on('click', function(){
+			
+		});
 	});
 
 })();
