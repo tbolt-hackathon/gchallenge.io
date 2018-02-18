@@ -63,10 +63,24 @@ body > section, body > .posts > article
     margin: 48px auto auto;
 }
 
+body > section.info
+{
+    background: #383fff;
+    height: 176px;
+}
+body > section.info.hidden
+{
+    z-index: -999;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
+}
+
 body > section.info > h1, body > section.info > h2
 {
     font-weight: normal;
     padding: 32px;
+    color: white;
 }
 
 body > section.info > h1
@@ -293,4 +307,16 @@ body > div.new-challenge-overlay > div.new-challenge-dialog > header > span
     color: white;
     font-weight: bolder;
     font-size: 1.2em;
+}
+
+body > section.post-info
+{
+
+}
+body > section.post-info.hidden
+{
+    z-index: -999;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
 }

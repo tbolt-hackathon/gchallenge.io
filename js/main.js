@@ -119,18 +119,30 @@
 			dataType: 'text'
 		}).done(function(tpl){
 			templates.article = tpl;
-			if(callback && templates.article && templates.article_video) callback();
+			if(callback && templates.article && templates.article_video && templates.comment) callback();
 		});
 		$.ajax({
 			url: 'views/article_video.htm',
 			dataType: 'text'
 		}).done(function(tpl){
 			templates.article_video = tpl;
-			if(callback && templates.article && templates.article_video) callback();
+			if(callback && templates.article && templates.article_video && templates.comment) callback();
+		});
+		$.ajax({
+			url: 'views/comment.htm',
+			dataType: 'text'
+		}).done(function(tpl){
+			templates.comment = tpl;
+			if(callback && templates.article && templates.article_video && templates.comment) callback();
 		});
 	}
 	
 	function post(title, body)
+	{
+		comment(APPTAG, title, body);
+	}
+
+	function comment(permlink, title, body)
 	{
 		if(!auth.loggedIn)
 		{
@@ -141,22 +153,16 @@
 
 		var meta = {};
 
-		golos.broadcast.comment(auth.keys.posting(), '', APPTAG, auth.login(), 'gchallenges-' + Date.now(), title, body, JSON.stringify(meta), function(err, result){
+		golos.broadcast.comment(auth.keys.posting(), '', permlink, auth.login(), 'gchallenges-' + (permlink === APPTAG ? '' : 'comment-') + Date.now(), title, body, JSON.stringify(meta), function(err, result){
 			console.log(err, result);
 		});
 	}
 
 	function loadPosts(){
-		if(!templates || !templates.article)
-		{
-			loadTemplates(loadPosts);
-			return;
-		}
-
 		golos.api.getDiscussionsByCreated({select_tags: [APPTAG], limit: 100}, function(err, result){
 			if(!err && result)
 			{
-				console.log(result);
+				$('div.posts').empty();
 				for(var k in result)
 				{
 					if(!result.hasOwnProperty(k)) continue;
@@ -168,16 +174,85 @@
 					view.find('.author').text(post.author);
 					view.find('.body').html(post.body);
 
+					view.on('click', (function(p){
+						return function(){
+							location.hash = '#/challenges/@' + p.author + '/' + p.permlink.replace('gchallenges-', '');
+						};
+					})(post));
+
 					$('div.posts').append(view);
 				}
 			}
 		});
 	}
 
+	function handleURL() {
+		if(!templates || !templates.article || !templates.article_video || !templates.comment)
+		{
+			loadTemplates(handleURL);
+			return;
+		}
+
+		$('section.info').removeClass('hidden');
+		$('section.post-info').addClass('hidden');
+
+		if(location.hash.indexOf('#/challenges/@') === 0)
+		{
+			var url = location.hash.replace('#/challenges/@', '');
+			var parts = url.split('/');
+			var author = parts[0];
+			var post = parts[1];
+
+			golos.api.getContent(author, 'gchallenges-' + post, function(err, post){
+				if(!err)
+				{
+					$('section.info').addClass('hidden');
+					$('section.post-info').removeClass('hidden');
+
+					$('div.posts').empty();
+
+					var view = $(templates.article);
+					view.find('.title').text(post.title);
+					view.find('.author').text(post.author);
+					view.find('.body').html(post.body);
+
+					$('div.posts').append(view);
+
+					golos.api.getContentReplies(post.author, post.permlink, function(err, result){
+						if(result)
+						{
+							$('section.post-info > div.comments').empty();
+							for(var k in result)
+							{
+								if(!result.hasOwnProperty(k)) continue;
+
+								var comment = result[k];
+
+								var view = $(templates.comment);
+								console.log(templates.comment, view);
+								view.find('.title').text(comment.title);
+								view.find('.author').text(comment.author);
+								view.find('.body').html(comment.body);
+
+								$('section.post-info > div.comments').append(view);
+							}
+						}
+					});
+				}
+			});
+		}
+		else
+		{
+			loadPosts();
+		}
+	}
+
 	$(function(){
 		loadConfig(function(){
-			loadPosts();
+			handleURL();
 		});
+
+		$(window).on('hashchange', handleURL);
 
 		$('a.action-signin').on('click', function(){
 			$('section.signin, button.signin-signin').toggleClass('hidden');
@@ -219,7 +294,7 @@
 		refreshAccountUI();
 
 		$('#addContentJson').on('click', function(){
-			var item_number = 1 + $('.jsonAdd:last').data('number');
+			var item_number = 1 + (+$('.jsonAdd:last').data('number'));
 			var utem_el = '<br><input type="text" class="form-control jsonAdd" id="battleJson['+item_number+']" data-nunber="'+item_number+'" placeholder="enter You video or picture url">';
 			console.log(utem_el);
 			$('.jsonAdd').append(utem_el);
