@@ -53,20 +53,22 @@
                             <input type="text" class="form-control" id="battleTitle" placeholder="Title">
                         </div>
 
-                        <div class="form-group">
-                            <label for="battleBody">Body</label>
-                            <input type="text" class="form-control" id="battleBody" placeholder="Body">
-                        </div>
-                        <div class="form-group jsonAdd">
-                            <label for="battleJson[]">Content</label>
-                            <input type="url" class="form-control" id="battleJson[]" placeholder="YouTube video or picture URL">
-                        </div>
-                        <!--div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div-->
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                            <div class="form-group">
+                                <label for="battleBody">Body</label>
+                                <input type="text" class="form-control" id="battleBody" placeholder="Body">
+                            </div>
+                            <div class="form-group">
+                                <label for="battleJson[0]">Content</label>
+                                <input type="text" class="form-control jsonAdd" id="battleJson[0]" data-nunber="0" placeholder="YouTube video or picture URL">
+                            </div>
+                            <!--div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div-->
+                            <button id="addContentJson" type="button" class="btn btn-primary">Add content</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
                 </section>
             </div>
         </div>

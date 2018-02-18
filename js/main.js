@@ -218,11 +218,16 @@
 
 		refreshAccountUI();
 
+		$('#addContentJson').on('click', function(){
+			var item_number = 1 + $('.jsonAdd:last').data('number');
+			var utem_el = '<br><input type="text" class="form-control jsonAdd" id="battleJson['+item_number+']" data-nunber="'+item_number+'" placeholder="enter You video or picture url">';
+			console.log(utem_el);
+			$('.jsonAdd').append(utem_el);
+		});
 		$("input.signin-login, input.signin-password").keyup(function(e){
 			if (e.keyCode === 13) {
 				$("button.signin-signin").click();
 			}
 		});
 	});
-
 })();
