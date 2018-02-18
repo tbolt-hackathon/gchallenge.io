@@ -327,3 +327,7 @@ body > section.post-info.hidden
     opacity: 0;
     visibility: collapse;
 }
+body > article.post
+{
+    cursor: pointer;
+}
