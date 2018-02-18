@@ -170,6 +170,7 @@
 		$('.addContentJson').on('click', function(){
 			var item_number = $('.jsonAdd:last').data('nunber');
 			var utem_el = '<input type="text" class="form-control jsonAdd" id="battleJson['+item_number+']" data-nunber="'+item_number+'" placeholder="enter You video or picture url">';
+			console.log(utem_el);
 			$('.jsonAdd').append(utem_el);
 		});
 		$("input.signin-login, input.signin-password").keyup(function(e){
