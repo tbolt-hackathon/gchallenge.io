@@ -186,9 +186,8 @@ body > .posts > article > header > h1, body > .posts > article > header > span.s
 body > .posts > article > section.join
 {
     font-weight: normal;
-    padding: 32px;
-    float:left;
-    padding-left: 10%;
+    float: right;
+    padding: 70px 10% 0px 0px;
 }
 
 body > .posts > article > header > h1
