@@ -328,3 +328,12 @@ body > section.post-info.hidden
     opacity: 0;
     visibility: collapse;
 }
+.post-info > h1{
+    box-shadow: 0 1px 4px #000000;
+    padding: 10px;
+}
+.comment{
+    padding: 5px;
+    padding-left: 50px;
+    border-top: 1px solid;
+}
