@@ -157,6 +157,7 @@ button.fab
     margin: 0;
     padding: 0;
     border-radius: 50%;
+    font-size: 2em;
 }
 
 body > .posts > article
@@ -268,9 +269,10 @@ body > div.new-challenge-overlay > div.new-challenge-dialog > header > a
     color: white;
     display: inline-block;
     text-align: center;
-    padding-top: 17px;
+    padding-top: 5px;
     box-sizing: border-box;
     cursor: pointer;
+    font-size: 2em;
 }
 
 body > div.new-challenge-overlay > div.new-challenge-dialog > header > a:hover
