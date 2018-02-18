@@ -167,20 +167,13 @@
 			$('section.signin, button.signin-signin').addClass('hidden');
 			$('a.action-signin').off('click').text('@' + auth.login());
 		});
-<<<<<<< HEAD
 		$('.addContentJson').on('click', function(){
 			
 		});
-	});
-
-=======
-
 		$("input.signin-login, input.signin-password").keyup(function(e){
 			if (e.keyCode === 13) {
 				$("button.signin-signin").click();
 			}
 		});
 	});
-
->>>>>>> a3feaf086ef34d77258c34a611ae32cd07735efe
 })();
