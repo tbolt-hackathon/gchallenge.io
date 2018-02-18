@@ -4,18 +4,30 @@
 	var config = null, node = null;
 	var templates = {};
 
-	function loadConfig(callback){
+	function loadJson(file, done, fail) {
 		$.ajax({
-			url: '_config/config.json',
+			url: '_config/' + file + '.json',
 			dataType: 'json'
-		}).done(function(c){
+		}).done(function(data){
+			if(done != null) done(data);
+		}).fail(function(err) {
+			$.ajax({
+				url: 'https://raw.githubusercontent.com/tbolt-hackathon/gchallenge.io/master/_config/' + file + '.json',
+				dataType: 'json'
+			}).done(function(data){
+				if(done != null) done(data);
+			}).fail(function(err) {
+				if(fail != null) fail(err);
+			});
+		});
+	}
+
+	function loadConfig(callback){
+		loadJson('config', function(c){
 			config = c;
 			if(config != null && config.golos.node != null)
 			{
-				$.ajax({
-					url: '_config/nodes/' + config.golos.node + '.json',
-					dataType: 'json'
-				}).done(function(n){
+				loadJson('nodes/' + config.golos.node, function(n){
 					node = n;
 					if(node != null)
 					{
