@@ -182,6 +182,7 @@ button.fab
 body > .posts > article
 {
     margin: 16px auto auto;
+    cursor: pointer;
 }
 
 body > .posts > article > header
@@ -315,15 +316,20 @@ body > div.new-challenge-overlay > div.new-challenge-dialog > header > span
     font-weight: bolder;
     font-size: 1.2em;
 }
-
-body > section.post-info
-{
-
-}
 body > section.post-info.hidden
 {
     z-index: -999;
     height: 0;
     opacity: 0;
     visibility: collapse;
+}
+.post-info > h1{
+    box-shadow: 0 1px 4px #000000;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+.comment{
+    padding: 5px;
+    padding-left: 50px;
+    border-top: 1px solid;
 }
