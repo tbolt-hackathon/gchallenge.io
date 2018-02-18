@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>GChallenge.io - challenges on golos.io mediablockchain</title>
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link rel="stylesheet" href="css/main.css" />
     </head>
     <body>
@@ -42,11 +42,27 @@
                     <span>New challenge</span>
                 </header>
                 <section class="content">
-
+                    <form class="col-xs-12">
+                        <div class="form-group">
+                          <label for="battle_tag">You battle teg</label>
+                          <input type="text" class="form-control" id="battle_tag" aria-describedby="emailHelp" placeholder="Enter You battle teg">
+                          <small id="emailHelp" class="form-text text-muted">Enter your battle teg to start the battle or use teg enemy</small>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
                 </section>
             </div>
         </div>
-
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/golos-js@0.5.30/dist/golos.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
         <script src="js/main.js"></script>
