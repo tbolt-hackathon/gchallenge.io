@@ -240,12 +240,17 @@ body > div.new-challenge-overlay.hidden
 
 body > div.new-challenge-overlay > div.new-challenge-dialog
 {
-    margin: 128px auto auto;
-    height: 500px;
+    width: 100%;
+    height: 50%;
+    box-sizing: border-box;
     max-width: 1024px;
     background: white;
     box-shadow: 0 1px 4px black;
     border-radius: 2px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
 }
 
 body > div.new-challenge-overlay > div.new-challenge-dialog > header
