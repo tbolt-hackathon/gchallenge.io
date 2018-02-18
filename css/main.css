@@ -183,6 +183,14 @@ body > .posts > article > header > h1, body > .posts > article > header > span.s
     padding: 32px;
 }
 
+body > .posts > article > section.join
+{
+    font-weight: normal;
+    padding: 32px;
+    float:left;
+    padding-left: 10%;
+}
+
 body > .posts > article > header > h1
 {
     margin-bottom: -20px;
