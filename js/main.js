@@ -2,6 +2,7 @@
 	var APPTAG = 'gchallenge';
 	var config = null, node = null;
 	var templates = {};
+	var currentPost = null;
 
 	var auth = {
 		loggedIn: !!localStorage.getItem('auth.login') && !!localStorage.getItem('auth.keys._pass'),
@@ -136,12 +137,12 @@
 		});
 	}
 	
-	function post(title, body)
+	function post(title, body, success, fail)
 	{
-		comment(APPTAG, title, body);
+		comment('', APPTAG, title, body, success, fail);
 	}
 
-	function comment(permlink, title, body)
+	function comment(parentAuthor, permlink, title, body, success, fail)
 	{
 		if(!auth.loggedIn)
 		{
@@ -152,12 +153,22 @@
 
 		var meta = {};
 
-		golos.broadcast.comment(auth.keys.posting(), '', permlink, auth.login(), 'gchallenges-' + (permlink === APPTAG ? '' : 'comment-') + Date.now(), title, body, JSON.stringify(meta), function(err, result){
+		golos.broadcast.comment(auth.keys.posting(), parentAuthor, permlink, auth.login(), 'gchallenges-' + (permlink === APPTAG ? '' : 'comment-') + Date.now(), title, body, JSON.stringify(meta), function(err, result){
 			console.log(err, result);
+			if(!err)
+			{
+				if(success != null) success();
+			}
+			else
+			{
+
+				if(fail != null) fail();
+			}
 		});
 	}
 
 	function loadPosts(){
+		currentPost = null;
 		golos.api.getDiscussionsByCreated({select_tags: [APPTAG], limit: 100}, function(err, result){
 			if(!err && result)
 			{
@@ -173,6 +184,8 @@
 					view.find('.author').text(post.author);
 					view.find('.body').html(post.body);
 
+					view.find('button.action-join').on('click', showForm);
+
 					view.on('click', (function(p){
 						return function(){
 							location.hash = '#/challenges/@' + p.author + '/' + p.permlink.replace('gchallenges-', '');
@@ -181,15 +194,16 @@
 
 					$('div.posts').append(view);
 				}
-				showForm();
 			}
 		});
 	}
 
 	function showForm(){
-		$('button.action-join').on('click', function(){
-			$('div.new-challenge-overlay').removeClass('hidden');
-		});
+		$('div.new-challenge-overlay').removeClass('hidden');
+	}
+
+	function hideForm(){
+		$('div.new-challenge-overlay').addClass('hidden');
 	}
 
 	function handleURL() {
@@ -222,6 +236,10 @@
 					view.find('.author').text(post.author);
 					view.find('.body').html(post.body);
 
+					view.find('button.action-join').on('click', showForm);
+
+					currentPost = post;
+
 					$('div.posts').append(view);
 
 					golos.api.getContentReplies(post.author, post.permlink, function(err, result){
@@ -244,7 +262,6 @@
 							}
 						}
 					});
-					showForm();
 				}
 			});
 		}
@@ -269,9 +286,7 @@
 			$('div.new-challenge-overlay').removeClass('hidden');
 		});
 
-		$('a.new-challenge-dialog-close').on('click', function(){
-			$('div.new-challenge-overlay').addClass('hidden');
-		});
+		$('a.new-challenge-dialog-close').on('click', hideForm);
 
 		$('button.action-post').on('contextmenu', function(){
 			post('Test', 'Hello, world!');
@@ -315,6 +330,21 @@
 			if (e.keyCode === 13) {
 				$("button.signin-signin").click();
 			}
+		});
+
+		$('form.new-challenge-form').on('submit', function(){
+			var isNewChallenge = currentPost == null;
+
+			var title = $('#battleTitle').val();
+			var body = $('#battleBody').val();
+
+			comment(isNewChallenge ? '' : currentPost.author, isNewChallenge ? APPTAG : currentPost.permlink, title, body, function () {
+				alert('Comment added');
+				hideForm();
+				handleURL();
+			});
+
+			return false;
 		});
 	});
 })();
