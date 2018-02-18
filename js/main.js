@@ -163,7 +163,3 @@
 	});
 
 })();
-
-$('document').ready(function(){
-	console.log($('.jsonAdd'));
-});
