@@ -331,6 +331,7 @@ body > section.post-info.hidden
 .post-info > h1{
     box-shadow: 0 1px 4px #000000;
     padding: 10px;
+    margin-bottom: 0px;
 }
 .comment{
     padding: 5px;
