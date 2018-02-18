@@ -182,6 +182,9 @@
 
 					$('div.posts').append(view);
 				}
+				$('button.action-join').on('click', function(){
+					$('div.new-challenge-overlay').removeClass('hidden');
+				});
 			}
 		});
 	}
